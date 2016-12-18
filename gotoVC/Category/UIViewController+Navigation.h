@@ -22,8 +22,9 @@
 
 #pragma mark - gotourl
 - (void)goToUrl:(NSURL * _Nonnull)url;
-- (void)goToUrl:(NSURL *_Nonnull)url ResetStack:(BOOL)reset;
-- (void)goToUrl:(NSURL *_Nonnull)url DestroyCurrent:(BOOL)destroy;
+- (void)goToUrl:(NSURL * _Nonnull)url Params:(NSDictionary * __nullable)params;
+- (void)goToUrl:(NSURL *_Nonnull)url Params:(NSDictionary * __nullable)params ResetStack:(BOOL)reset;
+- (void)goToUrl:(NSURL *_Nonnull)url Params:(NSDictionary * __nullable)params DestroyCurrent:(BOOL)destroy;
 
 
 #pragma mark - present dismiss

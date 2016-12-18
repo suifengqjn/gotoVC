@@ -8,6 +8,7 @@
 
 #import "UIViewController+Navigation.h"
 #import "XCNavigationRouter.h"
+#import "NSURL+Utility.h"
 @implementation UIViewController (Navigation)
 
 #pragma mark - gotopage
@@ -30,7 +31,7 @@
         return;
     }
     UIViewController *targetController = [nextPageClass new];
-    [targetController setValue:pageName forKey:@"page_name"];
+    //[targetController setValue:pageName forKey:@"page_name"];
     [targetController setValue:params forKey:@"xc_page_parameters"];
     if ([targetController isKindOfClass:[UIViewController class]]) {
         targetController.hidesBottomBarWhenPushed = YES;
@@ -45,6 +46,64 @@
     
     
 }
+
+
+#pragma mark - gotourl
+- (void)goToUrl:(NSURL * _Nonnull)url {
+    [self goToUrl:url Params:nil];
+}
+- (void)goToUrl:(NSURL * _Nonnull)url Params:(NSDictionary * __nullable)params{
+    [self goToUrl:url Params:params DestroyCurrent:NO];
+}
+- (void)goToUrl:(NSURL *_Nonnull)url Params:(NSDictionary * __nullable)params ResetStack:(BOOL)reset {
+    [self goToUrl:url Params:params ResetStack:reset DestroyCurrent:NO];
+}
+- (void)goToUrl:(NSURL *_Nonnull)url Params:(NSDictionary * __nullable)params DestroyCurrent:(BOOL)destroy {
+    [self goToUrl:url Params:params ResetStack:NO DestroyCurrent:destroy];
+}
+- (void)goToUrl:(NSURL *)url Params:(NSDictionary * __nullable)params ResetStack:(BOOL)reset DestroyCurrent:(BOOL)destroy {
+    
+    UIViewController *targetController = nil;
+    
+    // 跳转到网页
+    if ([url.scheme isEqualToString:@"http"] || [url.scheme isEqualToString:@"https"]) {
+        targetController = [[[XCNavigationRouter getInstance] getPageClassForPage:@"webview"] new];
+        NSMutableDictionary *newParam = [NSMutableDictionary dictionaryWithDictionary:params];
+        [newParam setValue:[url absoluteString] forKey:@"url"];
+        [newParam setValue:@(1) forKey:@"hidesBottomBarWhenPushed"];
+        //[newParam setValue:@"webview" forKey:@"page_name"];
+        [targetController setValue:newParam forKey:@"xc_page_parameters"];
+        
+    }
+    //根据deeplink 跳转到控制器
+    if ([url.scheme isEqualToString:@"fivemiles"]) {
+        NSString *pageName = [url host];
+        NSDictionary *params = [NSURL parserQueryText:[url query]];
+        
+        Class clazz = [[XCNavigationRouter getInstance] getPageClassForPage:pageName];
+        if (!clazz) {
+            return;
+        }
+        targetController = [clazz new];
+        
+        //[targetController setValue:url.host forKey:@"page_name"];
+        [targetController setValue:params forKey:@"xc_page_parameters"];
+    }
+    
+    if ([targetController isKindOfClass:[UIViewController class]]) {
+        [self checkNavigationDelegate];
+        [self markCurrentChildController];
+        if (reset) {
+            [self.navigationController setPageParameters:@{@"command" : @"reset"}];
+        }else if (destroy) {
+            [self.navigationController setPageParameters:@{@"command" : @"destroy"}];
+        }
+        
+        targetController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:targetController animated:YES];
+    }
+}
+
 
 
 #pragma mark - params

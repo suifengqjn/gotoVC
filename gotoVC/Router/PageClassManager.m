@@ -23,6 +23,9 @@
     if ([@"present" isEqualToString:pageName]) {
         return NSClassFromString(@"PresentController");
     }
+    if ([@"webview" isEqualToString:pageName]) {
+        return NSClassFromString(@"XCWebViewController");
+    }
     return nil;
 }
 

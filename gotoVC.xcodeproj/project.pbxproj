@@ -25,6 +25,7 @@
 		1D2C0C571E0672FA0035273A /* UIViewController+Navigation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D2C0C561E0672FA0035273A /* UIViewController+Navigation.m */; };
 		1D2C0C5A1E06732A0035273A /* XCNavigationRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D2C0C591E06732A0035273A /* XCNavigationRouter.m */; };
 		1D2C0C5D1E0680220035273A /* PageClassManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D2C0C5C1E0680220035273A /* PageClassManager.m */; };
+		1D2C0C601E06943F0035273A /* XCWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D2C0C5F1E06943F0035273A /* XCWebViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,8 @@
 		1D2C0C591E06732A0035273A /* XCNavigationRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCNavigationRouter.m; sourceTree = "<group>"; };
 		1D2C0C5B1E0680220035273A /* PageClassManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageClassManager.h; sourceTree = "<group>"; };
 		1D2C0C5C1E0680220035273A /* PageClassManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageClassManager.m; sourceTree = "<group>"; };
+		1D2C0C5E1E06943F0035273A /* XCWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCWebViewController.h; sourceTree = "<group>"; };
+		1D2C0C5F1E06943F0035273A /* XCWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCWebViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +133,8 @@
 			children = (
 				1D2C0C521E0672C00035273A /* XCViewController.h */,
 				1D2C0C531E0672C00035273A /* XCViewController.m */,
+				1D2C0C5E1E06943F0035273A /* XCWebViewController.h */,
+				1D2C0C5F1E06943F0035273A /* XCWebViewController.m */,
 				1D2C0C581E06732A0035273A /* XCNavigationRouter.h */,
 				1D2C0C591E06732A0035273A /* XCNavigationRouter.m */,
 				1D2C0C5B1E0680220035273A /* PageClassManager.h */,
@@ -235,6 +240,7 @@
 				1D2C0C431E0672940035273A /* NSDictionary+JSON.m in Sources */,
 				1D2C0C441E0672940035273A /* NSObject+KVC.m in Sources */,
 				1D2C0C261E0672160035273A /* AppDelegate.m in Sources */,
+				1D2C0C601E06943F0035273A /* XCWebViewController.m in Sources */,
 				1D2C0C511E0672AA0035273A /* TwoController.m in Sources */,
 				1D2C0C421E0672940035273A /* NSArray+JSON.m in Sources */,
 				1D2C0C5A1E06732A0035273A /* XCNavigationRouter.m in Sources */,
