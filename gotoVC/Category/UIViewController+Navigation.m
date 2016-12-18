@@ -174,6 +174,57 @@
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - pop
+- (void)popWithParams:(NSDictionary *__nullable)params {
+    NSArray *controllers = self.navigationController.viewControllers;
+    if (controllers.count <= 1) {
+        return;
+    }
+    UIViewController *last = controllers[controllers.count - 2];
+    [last setPageParameters:params];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+- (void)popToPage:(NSString *_Nonnull)pageName Params:(NSDictionary *__nullable)params {
+    [self popToPage:pageName Params:params Animated:YES];
+}
+- (void)popToPage:(NSString *_Nonnull)pageName Params:(NSDictionary *__nullable)params Animated:(BOOL)animated {
+    NSArray *controllers = self.navigationController.viewControllers;
+    if (controllers.count <= 1) {
+        return;
+    }
+    Class clazz = [[XCNavigationRouter getInstance] getPageClassForPage:pageName];
+    
+    UIViewController *target = nil;
+    for (NSUInteger index = 0; index < controllers.count; index++) {
+        UIViewController *vc = controllers[index];
+        if ([vc isKindOfClass:clazz]) {
+            target = vc;
+        }
+    }
+    if (target == nil) {
+        target = [clazz new];
+
+        //[target setValue:pageName forKey:@"pageName"];
+        [target setValue:params forKey:@"fivemiles_page_parameters"];
+        
+        if ([target isKindOfClass:[UIViewController class]]) {
+            target.hidesBottomBarWhenPushed = YES;
+            [self checkNavigationDelegate];
+            [self markCurrentChildController];
+            [target setPageParameters:params];
+            
+            NSMutableArray *controllerList = [controllers mutableCopy];
+            [controllerList insertObject:target atIndex:(controllers.count - 1)];
+            self.navigationController.viewControllers = controllerList;
+            
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        
+    }else{
+        [target setPageParameters:params];
+        [self.navigationController popToViewController:target animated:animated];
+    }
+}
 
 
 - (void)checkNavigationDelegate {
