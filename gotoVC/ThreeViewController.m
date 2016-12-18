@@ -32,6 +32,13 @@
     [button2 setTitle:@"pop" forState:UIControlStateNormal];
     [button2 addTarget:self action:@selector(popClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button2];
+    
+    UIButton *button3 = [UIButton buttonWithType:UIButtonTypeCustom];
+    button3.backgroundColor = [UIColor grayColor];
+    button3.frame = CGRectMake(100, 500, 100, 100);
+    [button3 setTitle:@"gotoOne" forState:UIControlStateNormal];
+    [button3 addTarget:self action:@selector(gotoOne) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button3];
 }
 
 
@@ -46,6 +53,9 @@
     [self popWithParams:@{@"from":@"three"}];
 }
 
+- (void)gotoOne {
+    [self popToPage:@"one" Params:@{@"from":@"three"}];
+}
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];

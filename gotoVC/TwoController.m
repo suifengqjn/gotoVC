@@ -32,6 +32,15 @@
     [button2 setTitle:@"pop" forState:UIControlStateNormal];
     [button2 addTarget:self action:@selector(popClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button2];
+    
+    
+    UIButton *button3 = [UIButton buttonWithType:UIButtonTypeCustom];
+    button3.backgroundColor = [UIColor grayColor];
+    button3.frame = CGRectMake(100, 500, 100, 100);
+    [button3 setTitle:@"desdroyCurrent" forState:UIControlStateNormal];
+    [button3 addTarget:self action:@selector(desdroyCurrent) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button3];
+
 }
 
 
@@ -45,6 +54,10 @@
     [self popWithParams:@{@"from":@"two"}];
 }
 
+- (void)desdroyCurrent
+{
+    [self goToPage:@"three" Params:@{@"from":@"two"} DestroyCurrent:YES];
+}
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
