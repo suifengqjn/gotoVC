@@ -20,6 +20,23 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+    <key>NSBluetoothPeripheralUsageDescription</key>
+    <string>We may use your bluetooth to improve the accuracy of location</string>
+    <key>NSCameraUsageDescription</key>
+    <string>We use your camera</string>
+    <key>NSContactsUsageDescription</key>
+    <string>"5miles" Would like to access your contacts</string>
+    <key>NSLocationUsageDescription</key>
+    <string>We use your current location to recommend items nearby</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>We use your current location to recommend items nearby</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>We use your photo library</string>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+    </dict>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
