@@ -141,6 +141,39 @@
     [self setValue:newParams forKey:@"xc_page_parameters"];
 }
 
+#pragma mark - present dismiss
+- (void)presentPage:(NSString *_Nonnull)pageName Params:(NSDictionary *__nullable)params completion:(void (^ __nullable)(void))completion {
+    
+    Class clazz = [[XCNavigationRouter getInstance] getPageClassForPage:pageName];
+    if (!clazz) {
+        return;
+    }
+    UIViewController *targetController = [clazz new];
+
+    //[targetController setValue:pageName forKey:@"pageName"];
+    [targetController setValue:params forKey:@"xc_page_parameters"];
+    
+    if ([targetController isKindOfClass:[UIViewController class]]) {
+        UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:targetController];
+        navigation.delegate = [XCNavigationRouter getInstance];
+        [self presentViewController:navigation animated:YES completion:completion];
+    }
+}
+
+- (void)dismissPageWithParams:(NSDictionary *__nullable)params {
+    UIViewController *controller = [self.navigationController presentingViewController];
+    if([controller isKindOfClass:[UITabBarController class]]){
+        UINavigationController *nav = [(UITabBarController *)controller selectedViewController];
+        [[nav topViewController] setPageParameters:params];
+    }else if ([controller isKindOfClass:[UINavigationController class]]){
+        [[(UINavigationController *)controller topViewController] setPageParameters:params];
+    }else {
+        [controller setPageParameters:params];
+    }
+    
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 
 - (void)checkNavigationDelegate {
